@@ -1,4 +1,6 @@
 
+import logger from "/js/logger.js";
+
 console.log("InteractiveCanvasDebugger");
 
 const canvas = window.interactiveCanvas;
@@ -31,6 +33,13 @@ async function main() {
   console.log("[canvas]", canvas);
 
   wrapperElem.setAttribute("style", `padding-top: ${headerHeightPx}px;`);
+
+  logger.log("hogehoge");
+  logger.log("hogehoge");
+  logger.log("hogehoge");
+  logger.log("hogehoge");
+  logger.log("hogehoge");
+  logger.log("hogehoge");
 
   canvas.ready(callbacks);
 }
