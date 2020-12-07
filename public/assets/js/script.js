@@ -18,9 +18,9 @@ const callbacks = {
       }
       const command = dataEntry.command ? dataEntry.command :
         dataEntry.google ? dataEntry.google.intent.name : null;
-        const params = dataEntry.displayWord ? dataEntry.displayedWord : null;
-        console.log("[onUpdate] command", command);
-        console.log("[onUpdate] params", params);
+      const params = dataEntry.displayWord ? dataEntry.displayedWord : null;
+      console.log("[onUpdate] command", command);
+      console.log("[onUpdate] params", params);
     } catch(e) {
       // catch
       console.error(e);
