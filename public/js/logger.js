@@ -7,12 +7,19 @@ class Logger {
 
   append(message) {
     const p = document.createElement("p");
-    console.log(message);
     p.textContent = message;
     this.elem.appendChild(p);
   }
 
   log(...messages) {
+    console.log(...messages);
+    for(let i = 0; i < messages.length; i++) {
+      this.append(messages[i]);
+    }
+  }
+
+  error(...messages) {
+    console.error(...messages);
     for(let i = 0; i < messages.length; i++) {
       this.append(messages[i]);
     }
