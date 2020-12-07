@@ -3,7 +3,8 @@ import logger from "/js/logger.js";
 
 const canvas = window.interactiveCanvas;
 
-const wrapperElem = document.querySelector(".js-wrapper");
+const contentElem = document.querySelector(".js-content");
+const loadingElem = document.querySelector(".js-loading");
 const startButtonElem = document.querySelector(".js-start-button");
 const endButtonElem = document.querySelector(".js-end-button");
 
@@ -42,7 +43,7 @@ async function main() {
   logger.log(`[headerHeightPx] ${headerHeightPx}`);
   console.log("[canvas]", canvas);
 
-  wrapperElem.setAttribute("style", `padding-top: ${headerHeightPx}px;`);
+  contentElem.setAttribute("style", `padding-top: ${headerHeightPx}px;`);
 
   startButtonElem.addEventListener("click", () => {
     logger.log("pressed start button !!");
@@ -54,6 +55,8 @@ async function main() {
   });
 
   canvas.ready(callbacks);
+
+  loadingElem.classList.remove("is-show");
 }
 
 main();
