@@ -1,12 +1,12 @@
 
-import logger from "/js/logger.js";
+import logger from "/assets/js/logger.js";
 
 const canvas = window.interactiveCanvas;
 
 const contentElem = document.querySelector(".js-content");
 const loadingElem = document.querySelector(".js-loading");
-const startButtonElem = document.querySelector(".js-start-button");
-const endButtonElem = document.querySelector(".js-end-button");
+const yesButtonElem = document.querySelector(".js-yes-button");
+const noButtonElem = document.querySelector(".js-no-button");
 
 const callbacks = {
   onUpdate: (data) => {
@@ -38,6 +38,14 @@ async function sendTextQuery(text) {
   logger.log(`[sendTextQuery] state: ${state}`);
 }
 
+async function wait(ms) {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve();
+    }, ms);
+  });
+}
+
 async function main() {
   const headerHeightPx = await canvas.getHeaderHeightPx();
   logger.log(`[headerHeightPx] ${headerHeightPx}`);
@@ -45,16 +53,18 @@ async function main() {
 
   contentElem.setAttribute("style", `padding-top: ${headerHeightPx}px;`);
 
-  startButtonElem.addEventListener("click", () => {
+  yesButtonElem.addEventListener("click", () => {
     logger.log("pressed start button !!");
     sendTextQuery("yes");
   });
-  endButtonElem.addEventListener("click", () => {
+  noButtonElem.addEventListener("click", () => {
     logger.log("pressed end button !!");
     sendTextQuery("no");
   });
 
   canvas.ready(callbacks);
+
+  await wait(1000);
 
   loadingElem.classList.remove("is-show");
 }
