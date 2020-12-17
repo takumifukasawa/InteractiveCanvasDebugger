@@ -46,6 +46,25 @@ async function wait(ms) {
   });
 }
 
+async function loadAudio(src) {
+  return new Promise((resolve, reject) => {
+    const onload = () => {
+      resolve(sound);
+    };
+    const onloaderror = () => {
+      reject();
+    }
+    const sound = new Howl({
+      src: [src],
+      autoplay: false,
+      preload: false,
+      onload,
+      onloaderror,
+    });
+    sound.load();
+  });
+}
+
 async function main() {
   const headerHeightPx = await canvas.getHeaderHeightPx();
   logger.log(`[headerHeightPx] ${headerHeightPx}`);
@@ -64,9 +83,17 @@ async function main() {
 
   canvas.ready(callbacks);
 
+  logger.log("loaded se.");
+  const se = await loadAudio("/assets/audio/sample-1.mp3");
+
   await wait(1000);
 
   loadingElem.classList.remove("is-show");
+
+  await wait(500);
+
+  logger.log("play se.");
+  se.play();
 }
 
 main();
